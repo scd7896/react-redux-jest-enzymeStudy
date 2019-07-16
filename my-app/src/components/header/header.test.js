@@ -13,8 +13,8 @@ const setUp =(props ={})=>{
 
 
 describe('헤더 컴포넌트', ()=>{
+    
     let component;
-
     beforeEach(()=>{
         component = setUp();
     })
