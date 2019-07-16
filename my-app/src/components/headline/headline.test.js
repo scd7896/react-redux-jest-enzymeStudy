@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow, mount, render, configure } from 'enzyme'
 import Headline from './index'
+import checkPropTypes from 'check-prop-types'
 
-import {findByTestAtrr} from '../../../Utils';
+import {findByTestAtrr, checkProps} from '../../../Utils';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
@@ -12,6 +13,25 @@ const setUp = (props ={})=>{
 }
 
 describe('헤드라인 커포넌트',()=>{
+
+    describe('프롭스 검사', ()=>{
+        it('경고를 던지지마라', ()=>{
+            const expectedProps ={
+                header : 'Test header',
+                desc: 'test desc',
+                tempArr : [{
+                    fName : 'Test',
+                    lName : 'Test Lname',
+                    email : 'Test email',
+                    age : 12,
+                    onlineStatus : false
+                }]
+            }
+            const propsErr = checkProps(Headline, expectedProps)
+            expect(propsErr).toBeUndefined()
+        })
+    })
+
     describe('프롭스가 있을때', ()=>{
         let wrapper;
         beforeEach(()=>{
